@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800;900&display=swap');
 
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f3f7ff;
+  background-color: #f2f2f2;
 }
 
 * {
@@ -14,128 +14,88 @@ body {
 }
 
 .App {
-  padding: 50px;
-  width: 400px;
-  margin: 100px auto;
-  border-radius: 30px;
-  background-color: #fff;
-  position: relative;
-  box-shadow: 0 15px 10px rgba(0, 13, 189, 0.05);
+  display: flex;
+}
 
-  button {
-    margin-top: 30px;
-    padding: 18px;
-    border-radius: 15px;
-    outline: none;
-    border: 0;
-    width: 100%;
-    font-size: 16px;
-    font-weight: 600;
-    color: #000;
-    background: #60f48d;
-    background: linear-gradient(90deg, #60f48d 0%, #76f4e8 100%);
+.text-skeleton {
+  margin-top: 30px;
+}
+
+.list {
+  list-style: none;
+  padding: 20px 10px;
+  margin: 0;
+  width: 300px;
+
+  li {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: all 0.1s ease-in-out;
-    box-shadow: 0 10px 10px #30ffba6f;
+    font-weight: 500;
+    margin-bottom: 4px;
+
+    .triangle {
+      width: 0.6875em;
+      height: 0.6875em;
+      display: block;
+      fill: rgba(55, 53, 47, 0.7);
+      flex-shrink: 0;
+      margin-right: 8px;
+      backface-visibility: hidden;
+      transition: transform 200ms ease-out 0s;
+      transform: rotateZ(90deg);
+      opacity: 1;
+    }
+
+    .page {
+      width: 18px;
+      height: 18px;
+      display: block;
+      fill: rgba(55, 53, 47, 0.7);
+      flex-shrink: 0;
+      backface-visibility: hidden;
+    }
+
+    &.active {
+      background-color: #e8e7e4;
+    }
 
     &:hover {
-      transform: scale(1.02);
+      background-color: #e8e7e4;
     }
 
-    &:active {
-      transform: scale(0.99);
-      box-shadow: 0 10px 10px #30ffba33;
+    svg {
+      margin-right: 5px;
     }
-  }
 
-  &:before {
-    content: '';
-    display: block;
-    position: absolute;
-    left: -50px;
-    top: -50px;
-    width: calc(100% + 25%);
-    height: 100%;
-    background-color: #e9e9ff;
-    border-radius: 30px;
-    z-index: -1;
-  }
-
-  .subtitle {
-    display: block;
-    font-size: 16px;
-    margin-bottom: 5px;
-    opacity: 0.5;
-  }
-
-  h2 {
-    font-family: 'Inter', sans-serif;
-    font-weight: 900;
-    font-size: 24px;
-    border-radius: 15px;
-    outline: none;
-    width: 100%;
-    margin: 0;
+    &.active {
+      font-weight: 600;
+    }
   }
 }
 
-.row {
+.list-skeleton {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 20px;
+  flex-direction: column;
+  padding: 20px 10px;
+
+  svg {
+    margin-bottom: 5px;
+  }
 }
 
-.pwg-length {
-  width: 80px;
-  padding: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-}
+.content {
+  background-color: #fff;
+  padding: 80px 100px;
+  width: 100%;
+  height: 100vh;
 
-.styled-checkbox {
-  position: absolute;
-  opacity: 0;
-
-  & + label {
-    position: relative;
-    cursor: pointer;
+  .title-input {
+    font-size: 48px;
+    border: 0;
     padding: 0;
-  }
-
-  // Box.
-  & + label:before {
-    content: '';
-    display: inline-block;
-    vertical-align: text-top;
-    width: 22px;
-    height: 22px;
-    background: white;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-  }
-
-  // Box hover
-  &:hover + label:before {
-    background: #f9f9f9;
-  }
-
-  // Box checked
-  &:checked + label:before {
-    background: #41dab9;
-  }
-
-  // Checkmark. Could be replaced with an image
-  &:checked + label:after {
-    content: '';
-    position: absolute;
-    left: 7px;
-    top: 11px;
-    background: white;
-    width: 2px;
-    height: 2px;
-    box-shadow: 2px 0 0 white, 4px 0 0 white, 4px -2px 0 white, 4px -4px 0 white, 4px -6px 0 white,
-      4px -8px 0 white;
-    transform: rotate(45deg);
+    font-weight: 700;
   }
 }
