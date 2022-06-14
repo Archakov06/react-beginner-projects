@@ -1,117 +1,141 @@
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap');
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-    Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #eff0f1;
+  background-color: #f3f7ff;
 }
 
 * {
   box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+  outline: none;
 }
 
 .App {
   padding: 50px;
-  width: 100%;
-  max-width: 1200px;
-}
+  width: 400px;
+  margin: 100px auto;
+  border-radius: 30px;
+  background-color: #fff;
+  position: relative;
+  box-shadow: 0 15px 10px rgba(0, 13, 189, 0.05);
 
-h1 {
-  font-family: 'Merriweather', serif;
-}
-
-.tags {
-  list-style: none;
-  padding: 0;
-  margin-top: 30px;
-
-  li {
-    margin-bottom: 20px;
-    display: inline-block;
-    padding: 12px 18px;
-    background-color: #fff;
-    border-radius: 10px;
-    margin-right: 10px;
+  button {
+    margin-top: 30px;
+    padding: 18px;
+    border-radius: 15px;
+    outline: none;
+    border: 0;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+    background: #60f48d;
+    background: linear-gradient(90deg, #60f48d 0%, #76f4e8 100%);
     cursor: pointer;
-    font-weight: 500;
-    font-size: 18px;
-    border: 1px solid transparent;
-    transition: all 0.15s ease-in-out;
+    transition: all 0.1s ease-in-out;
+    box-shadow: 0 10px 10px #30ffba6f;
 
     &:hover {
-      border-color: #000;
+      transform: scale(1.02);
     }
 
-    &.active {
-      background-color: #000;
-      color: #fff;
+    &:active {
+      transform: scale(0.99);
+      box-shadow: 0 10px 10px #30ffba33;
     }
   }
-}
 
-.content {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-column-gap: 30px;
-  grid-row-gap: 30px;
-  margin-top: 40px;
-
-  @media (max-width: 1000px) {
-    grid-template-columns: repeat(2, 1fr);
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: -50px;
+    top: -50px;
+    width: calc(100% + 25%);
+    height: 100%;
+    background-color: #e9e9ff;
+    border-radius: 30px;
+    z-index: -1;
   }
 
-  @media (max-width: 600px) {
-    grid-template-columns: repeat(1, 1fr);
+  .subtitle {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 5px;
+    opacity: 0.5;
   }
-}
 
-.collection {
-  max-width: 470px;
-  background-color: #fff;
-  padding: 30px;
-  border-radius: 30px;
-  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.05);
-  cursor: pointer;
-  transition: all 0.15s ease-in-out;
-
-  h4 {
+  h2 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
+    font-size: 24px;
+    border-radius: 15px;
+    outline: none;
+    width: 100%;
     margin: 0;
-    margin-top: 15px;
-    font-size: 20px;
-    font-family: 'Merriweather', serif;
+  }
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.pwg-length {
+  width: 80px;
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.styled-checkbox {
+  position: absolute;
+  opacity: 0;
+
+  & + label {
+    position: relative;
+    cursor: pointer;
+    padding: 0;
   }
 
-  &:hover {
-    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
-    transform: translateY(-5px);
+  // Box.
+  & + label:before {
+    content: '';
+    display: inline-block;
+    vertical-align: text-top;
+    width: 22px;
+    height: 22px;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
   }
 
-  @media (max-width: 1000px) {
-    width: 100%;
+  // Box hover
+  &:hover + label:before {
+    background: #f9f9f9;
   }
 
-  img {
-    object-fit: cover;
+  // Box checked
+  &:checked + label:before {
+    background: #41dab9;
   }
 
-  &__big {
-    height: 250px;
-    width: 100%;
-    border-radius: 20px;
-    margin-bottom: 15px;
-  }
-
-  &__bottom {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  &__mini {
-    width: 31%;
-    height: 80px;
-    border-radius: 20px;
+  // Checkmark. Could be replaced with an image
+  &:checked + label:after {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 11px;
+    background: white;
+    width: 2px;
+    height: 2px;
+    box-shadow: 2px 0 0 white, 4px 0 0 white, 4px -2px 0 white, 4px -4px 0 white, 4px -6px 0 white,
+      4px -8px 0 white;
+    transform: rotate(45deg);
   }
 }
