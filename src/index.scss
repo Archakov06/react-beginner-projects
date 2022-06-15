@@ -1,10 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap');
 
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #efeef5;
+  background-color: #dfe2ff;
 }
 
 * {
@@ -14,177 +15,100 @@ body {
 }
 
 .App {
-  display: flex;
-  flex-direction: column;
-  background-color: #fff;
-  width: 600px;
+  width: 400px;
+  height: 600px;
   margin: 50px auto;
-  border-radius: 20px;
+  background-color: #fff;
+  border-radius: 30px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  padding: 40px;
 }
 
-.top {
+.search {
   position: relative;
 
+  input {
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 15px;
+    border-radius: 15px;
+    width: 100%;
+    font-size: 16px;
+    padding-left: 50px;
+  }
+
   svg {
+    width: 18px;
+    height: 18px;
     position: absolute;
-    right: 25px;
     top: 17px;
-    cursor: pointer;
+    left: 20px;
     opacity: 0.3;
-    transition: all 0.15s ease-in-out;
-
-    &:hover {
-      opacity: 1;
-    }
   }
 }
 
-.form {
-  display: flex;
-  align-items: center;
-  width: 100%;
-
-  &__checkbox {
-    margin: 15px 20px;
-  }
-
-  &__fields {
-    display: flex;
-    flex-direction: column;
-    padding: 10px 0;
-    flex: 1;
-  }
-
-  svg {
-    margin-right: 20px;
-    cursor: pointer;
-    opacity: 0.3;
-    transition: all 0.15s ease-in-out;
-
-    &:hover {
-      opacity: 1;
-    }
-  }
-}
-
-.input-title {
-  font-size: 18px;
-  border: none;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-.input-text {
-  font-size: 16px;
-  border: none;
-}
-
-.tabs {
-  display: flex;
+.users-list {
   list-style: none;
   padding: 0;
   margin: 0;
-  border-bottom: 2px solid rgb(249, 249, 249);
+  overflow: auto;
+  height: calc(100% - 80px);
+  margin-top: 30px;
 
   li {
-    padding: 18px 20px;
-    border-bottom: 2px solid transparent;
-    cursor: pointer;
-    transition: all 0.1s ease-in-out;
-    color: #c0bbd4;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
 
-    &:hover {
-      border-bottom-color: #e3d8fa;
+    & > div {
+      display: flex;
     }
 
-    &.active {
-      border-bottom-color: #5f2acf;
-      color: #000000;
+    img.avatar {
+      border-radius: 30px;
+      width: 50px;
+      height: 50px;
+      margin-right: 15px;
     }
-  }
-}
 
-.item {
-  display: flex;
-  align-items: flex-start;
-  padding: 20px;
-  border-bottom: 1px solid #f0f0f0;
+    .action {
+      width: 28px;
+      height: 28px;
+      opacity: 0.3;
+      cursor: pointer;
 
-  &__content {
-    margin-left: 20px;
+      &:hover {
+        opacity: 0.8;
+      }
+    }
 
-    b {
-      font-size: 18px;
+    h3 {
+      margin: 0;
+      font-weight: 900;
+      font-family: 'Merriweather', serif;
+      margin-left: 15px;
+      margin-top: 5px;
+      margin-left: 0;
+      color: #182170;
     }
 
     p {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
       margin: 0;
-      margin-top: 5px;
-      color: #8387a6;
-    }
-  }
+      color: rgba(0, 0, 0, 0.5);
+      margin-top: 3px;
 
-  &__bottom {
-    margin-top: 10px;
-    display: flex;
-    align-items: center;
-    font-size: 15px;
-    color: #8387a6;
+      svg {
+        width: 16px;
+        height: 16px;
+        margin-right: 4px;
 
-    svg {
-      width: 24px;
-      height: 24px;
-
-      path {
-        fill: #8387a6;
+        path {
+          fill: rgba(0, 0, 0, 0.2);
+        }
       }
     }
-  }
-}
-
-.styled-checkbox {
-  position: absolute;
-  opacity: 0;
-
-  & + label {
-    position: relative;
-    cursor: pointer;
-    padding: 0;
-  }
-
-  // Box.
-  & + label:before {
-    content: '';
-    display: inline-block;
-    vertical-align: text-top;
-    width: 22px;
-    height: 22px;
-    background: white;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-  }
-
-  // Box hover
-  &:hover + label:before {
-    background: #f9f9f9;
-  }
-
-  // Box checked
-  &:checked + label:before {
-    background: #5f2acf;
-  }
-
-  // Checkmark. Could be replaced with an image
-  &:checked + label:after {
-    content: '';
-    position: absolute;
-    left: 7px;
-    top: 11px;
-    background: white;
-    width: 2px;
-    height: 2px;
-    box-shadow: 2px 0 0 white, 4px 0 0 white, 4px -2px 0 white, 4px -4px 0 white, 4px -6px 0 white,
-      4px -8px 0 white;
-    transform: rotate(45deg);
   }
 }
