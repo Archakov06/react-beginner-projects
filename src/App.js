@@ -1,67 +1,159 @@
+import React from 'react';
 import './index.scss';
 
-function Collection({ name, images }) {
+const variants = [
+  {
+    name: 'paper',
+    beat: 'rock',
+  },
+  {
+    name: 'rock',
+    beat: 'scissors',
+  },
+  {
+    name: 'scissors',
+    beat: 'paper',
+  },
+];
+
+function Variant({ onClick, waiting, thinking, value }) {
+  if (waiting) {
+    return (
+      <svg className="waiting" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <g>
+          <g>
+            <path d="M16,1C7.7157202,1,1,7.7157202,1,16s6.7157202,15,15,15s15-6.7157192,15-15S24.2842808,1,16,1z M16,27.7857151    C9.4909277,27.7857151,4.2142859,22.5090733,4.2142859,16S9.4909277,4.2142859,16,4.2142859S27.7857151,9.4909277,27.7857151,16    S22.5090733,27.7857151,16,27.7857151z" />
+          </g>
+          <g>
+            <path d="M22.5761719,22.1396484c-0.2148438,0-0.4316406-0.0693359-0.6152344-0.2119141l-6.5771484-5.1396484    C15.1416016,16.5986328,15,16.3076172,15,16V9.4228516c0-0.5522461,0.4472656-1,1-1s1,0.4477539,1,1v6.0893555    l6.1933594,4.8393555c0.4345703,0.340332,0.5117188,0.96875,0.171875,1.4038086    C23.1679688,22.0078125,22.8740234,22.1396484,22.5761719,22.1396484z" />
+          </g>
+        </g>
+      </svg>
+    );
+  }
+
+  if (thinking) {
+    return <img className="thinking" src="/assets/loading.svg" />;
+  }
+
   return (
-    <div className="collection">
-      <img className="collection__big" src={images[0]} alt="Item" />
-      <div className="collection__bottom">
-        <img className="collection__mini" src={images[1]} alt="Item" />
-        <img className="collection__mini" src={images[2]} alt="Item" />
-        <img className="collection__mini" src={images[3]} alt="Item" />
-      </div>
-      <h4>{name}</h4>
-    </div>
+    <img
+      onClick={onClick}
+      className="variant"
+      width={180}
+      src={`assets/${value}.svg`}
+      alt="Variant"
+    />
   );
 }
 
 function App() {
+  const [user, setUser] = React.useState({
+    selected: false,
+    variant: 'paper',
+    wins: 0,
+  });
+  const [bot, setBot] = React.useState({
+    thinking: false,
+    waiting: true,
+    variant: '',
+    wins: 0,
+  });
+
+  const onClickRefresh = () => {
+    setUser((prev) => ({
+      selected: false,
+      variant: 'paper',
+      wins: prev.wins,
+    }));
+    setBot((prev) => ({
+      thinking: false,
+      waiting: true,
+      variant: '',
+      wins: prev.wins,
+    }));
+  };
+
+  const onClickToggleVariant = () => {
+    const arr = variants.map((obj) => obj.name);
+    const index = arr.findIndex((v) => v === user.variant);
+    const newVariant = arr[(index + 1) % 3];
+
+    setUser((prev) => ({
+      ...prev,
+      variant: newVariant,
+    }));
+  };
+
+  const onClickClickNext = () => {
+    setUser((prev) => ({
+      ...prev,
+      selected: true,
+    }));
+    setBot((prev) => ({ ...prev, thinking: true, waiting: false }));
+    setTimeout(() => {
+      setBot((prev) => ({
+        ...prev,
+        thinking: false,
+        selected: true,
+        variant: variants[Math.floor(Math.random() * 3)].name,
+      }));
+    }, 1000);
+  };
+
+  React.useEffect(() => {
+    if (bot.selected && user.selected) {
+      const userVariantBeat = variants.find((obj) => obj.name === user.variant);
+      if (user.variant === bot.variant) {
+        return;
+      }
+      if (userVariantBeat.beat === bot.variant) {
+        setUser((prev) => ({ ...prev, wins: prev.wins + 1 }));
+      } else {
+        setBot((prev) => ({ ...prev, wins: prev.wins + 1 }));
+      }
+    }
+  }, [bot.variant, user.variant]);
+
   return (
     <div className="App">
-      <h1>Моя коллекция фотографий</h1>
-      <ul className="tags">
-        <li className="active">Все</li>
-        <li>Горы</li>
-        <li>Море</li>
-        <li>Архитектура</li>
-        <li>Города</li>
-      </ul>
-      <div className="content">
-        <Collection
-          name="Поход в горы"
-          images={[
-            'https://images.unsplash.com/photo-1613310023042-ad79320c00ff?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bW91bmF0aW5zfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            'https://images.unsplash.com/photo-1612676239016-41e2c92b8e06?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8bW91bmF0aW5zfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            'https://images.unsplash.com/photo-1610809027249-86c649feacd5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8bW91bmF0aW5zfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            'https://images.unsplash.com/photo-1621682372775-533449e550ed?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8bW91bmF0aW5zfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-          ]}
-        />
-        <Collection
-          name="Море (июнь)"
-          images={[
-            'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fHNlYSUyMGFlc3RoZXRpY3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-            'https://images.unsplash.com/photo-1621335223658-0ebd89004d51?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8c2VhJTIwYWVzdGhldGljfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-            'https://images.unsplash.com/photo-1501436513145-30f24e19fcc8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fHNlYSUyMGFlc3RoZXRpY3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-            'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8c2VhJTIwYWVzdGhldGljfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
-          ]}
-        />
-        <Collection
-          name="Поездка в Европу"
-          images={[
-            'https://images.unsplash.com/photo-1610010252747-afeb906e2d55?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YXJjaGljdHVyZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
-            'https://images.unsplash.com/photo-1630335856915-3987afdfdc9a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGFyY2hpY3R1cmV8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-            'https://images.unsplash.com/photo-1609471374271-0d9b03da0998?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGFyY2hpY3R1cmV8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-            'https://images.unsplash.com/photo-1613390792897-aa0c06a52332?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fGFyY2hpY3R1cmV8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-          ]}
-        />
-        <Collection
-          name="Путешествие по миру"
-          images={[
-            'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fGNpdHl8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-            'https://images.unsplash.com/photo-1560840067-ddcaeb7831d2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDB8fGNpdHl8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-            'https://images.unsplash.com/photo-1531219572328-a0171b4448a3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzl8fGNpdHl8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-            'https://images.unsplash.com/photo-1573108724029-4c46571d6490?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzR8fGNpdHl8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60',
-          ]}
-        />
+      <header>
+        <h3>
+          <span>Вы:</span> <b>{user.wins}</b>
+        </h3>
+        <h3>
+          <img
+            onClick={onClickRefresh}
+            className="refresh"
+            src="/assets/refresh.svg"
+            alt="Refresh"
+          />
+          VS
+        </h3>
+        <h3>
+          PC: <b>{bot.wins}</b>
+        </h3>
+      </header>
+
+      <div className="game">
+        <div className="game__user">
+          <div className={`user ${user.selected ? 'userSelect' : ''}`}>
+            <Variant key={user.variant} onClick={onClickToggleVariant} value={user.variant} />
+          </div>
+
+          {!user.selected && (
+            <img
+              onClick={onClickClickNext}
+              className="game__arrow"
+              src="/assets/arrow-right.svg"
+              alt="Arrow"
+            />
+          )}
+        </div>
+
+        <div className={bot.selected ? 'botSelect' : ''}>
+          <Variant waiting={bot.waiting} thinking={bot.thinking} value={bot.variant} />
+        </div>
       </div>
     </div>
   );
