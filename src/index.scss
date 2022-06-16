@@ -1,159 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap');
 
-body {
-  margin: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #ffea00;
-}
-
 * {
-  box-sizing: border-box;
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Nunito', system-ui !important;
 }
 
 .App {
-  padding: 100px;
-  width: 100%;
-  max-width: 900px;
-  margin: 100px auto;
-  background-color: #fff;
-  border-radius: 30px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-}
+  padding-bottom: 30px;
 
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-left: 70px;
-  padding-right: 60px;
-
-  h3 {
-    text-align: center;
-    font-size: 24px;
-  }
-
-  b {
-    display: block;
-    font-size: 62px;
-    font-weight: 900;
+  &_dark {
+    background-color: #121212;
   }
 }
 
-.game {
-  display: flex;
-  justify-content: space-between;
-  margin: 50px 0;
-
-  &__user {
-    display: flex;
-    align-items: center;
-  }
-
-  &__arrow {
-    width: 80px;
-    margin-left: 30px;
-    transition: all 0.1s ease-in-out;
-    cursor: pointer;
-    opacity: 0.3;
-
-    &:hover {
-      transform: translateX(10px);
-      opacity: 1;
-    }
-  }
-}
-
-.variant {
-  cursor: pointer;
-  transition: all 0.1s ease-in-out;
-  animation: showVariant 0.5s ease-in-out;
-
-  &:hover {
-    transform: scale(1.1);
-  }
-}
-
-.refresh {
-  cursor: pointer;
-}
-
-.waiting {
-  width: 140px;
-  animation: waiting 1s ease-in-out infinite;
-  path {
-    fill: rgba(0, 0, 0, 0.3);
-  }
-}
-
-.thinking {
-  width: 140px;
-  animation: thinking 1s ease-in-out infinite;
-}
-
-.userSelect {
-  animation: rightAnimate 0.5s ease-in-out;
-  animation-fill-mode: forwards;
-  pointer-events: none;
-}
-
-.botSelect {
-  animation: leftAnimate 0.5s ease-in-out;
-  animation-fill-mode: forwards;
-  pointer-events: none;
-}
-
-@keyframes waiting {
-  0% {
-    transform: scale(0.9);
-  }
-  50% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(0.9);
-  }
-}
-
-@keyframes thinking {
-  0% {
-    transform: rotate(0deg);
-  }
-  50% {
-    transform: rotate(90deg);
-  }
-  100% {
-    transform: rotate(180deg);
-  }
-}
-
-@keyframes showVariant {
-  0% {
-    transform: scale(0);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-@keyframes rightAnimate {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(120px);
-  }
-}
-
-@keyframes leftAnimate {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-120px);
-  }
+.movies {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 30px;
+  grid-row-gap: 30px;
 }

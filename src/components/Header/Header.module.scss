@@ -1,0 +1,32 @@
+.root {
+  margin-bottom: 30px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 20px;
+
+  h5 {
+    font-weight: bold !important;
+  }
+}
+
+.rightSide {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  margin-right: 30px;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+}
