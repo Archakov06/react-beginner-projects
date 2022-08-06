@@ -51,7 +51,7 @@ body {
   padding: 0;
   margin: 0;
   overflow: auto;
-  height: calc(100% - 80px);
+  height: calc(100% - 130px);
   margin-top: 30px;
 
   li {
@@ -110,5 +110,78 @@ body {
         }
       }
     }
+  }
+}
+
+.send-invite-btn {
+  background-color: rgb(251, 80, 0);
+  padding: 16px 15px;
+  border-radius: 15px;
+  font-size: 16px;
+  color: #fff;
+  width: 100%;
+  border: 0;
+  outline: none;
+  box-shadow: 0 7px 10px rgba(251, 80, 0, 0.4);
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+
+  &:hover {
+    background-color: rgb(255, 97, 24);
+  }
+
+  &:active {
+    transform: translateY(2px);
+    box-shadow: none;
+  }
+}
+
+.success-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  flex-direction: column;
+  animation: success-show 0.5s cubic-bezier(0.25, 0.75, 0.5, 1.25);
+
+  img {
+    width: 120px;
+    height: 120px;
+  }
+
+  h3 {
+    font-size: 24px;
+    margin-bottom: 0;
+    margin-top: 10px;
+  }
+
+  p {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  button {
+    width: 200px;
+  }
+}
+
+.skeleton-list {
+  height: calc(100% - 130px);
+  margin-top: 30px;
+
+  svg {
+    margin-bottom: 15px;
+  }
+}
+
+@keyframes success-show {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
 }
