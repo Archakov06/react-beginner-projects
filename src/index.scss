@@ -1,10 +1,13 @@
-body {
-  margin: 0;
+* {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
     'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+  margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #edf6f9;
+  background-color: #e6e8ec;
 }
 
 .App {
@@ -13,59 +16,95 @@ body {
   justify-content: center;
   height: 100vh;
   text-align: center;
+}
 
-  h1 {
-    color: #000;
-    font-size: 7rem;
-    margin: 0;
-    margin-bottom: 20px;
+.open-modal-btn {
+  background: #fff;
+  padding: 18px 25px;
+  border-radius: 20px;
+  font-weight: 500;
+  border: 0;
+  outline: none;
+  font-size: 22px;
+  cursor: pointer;
+  line-height: 23px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.1s ease-in-out;
 
-    &.plus {
-      color: #2a9d8f;
-    }
-    &.minus {
-      color: #e63946;
-    }
+  &:hover {
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
   }
 
-  h2 {
-    font-size: 2rem;
-    margin: 0;
-    color: #556581;
+  &:active {
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    transform: translateY(0);
+  }
+}
+
+.overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  transition: all 0.5s ease-in-out;
+}
+
+.modal {
+  background-color: #fff;
+  width: 70%;
+  max-width: 500px;
+  max-height: 300px;
+  padding: 40px 30px;
+  border-radius: 10px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.5s ease-in-out;
+
+  img {
+    border-radius: 5px;
+    width: 100%;
   }
 
-  button {
-    background: transparent;
-    border: 2px solid transparent;
-    text-align: center;
-    font-size: 22px;
-    border-radius: 15px;
-    padding: 10px 25px;
+  svg {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    height: 24px;
+    width: 24px;
+    opacity: 0.3;
     cursor: pointer;
-    margin: 0 10px;
-    transition: all 0.05s ease-in-out;
-
-    &.minus {
-      background-color: #e63946;
-      color: #fff;
-      box-shadow: 0 4px 0 darken(#e63946, 10%);
-      border: 1px solid darken(#e63946, 15%);
-    }
-
-    &.plus {
-      background-color: #2a9d8f;
-      color: #fff;
-      box-shadow: 0 4px 0 darken(#2a9d8f, 10%);
-      border: 1px solid darken(#2a9d8f, 15%);
-    }
 
     &:hover {
-      transform: translateY(-2px);
+      opacity: 1;
     }
+  }
+}
 
-    &:active {
-      transform: translateY(2px);
-      box-shadow: none;
+.overlay.animated {
+  opacity: 0;
+  visibility: hidden;
+
+  .modal {
+    opacity: 0;
+    visibility: hidden;
+    transform: translate(-50%, -30%);
+    transition-delay: 0.2s;
+  }
+
+  &.show {
+    opacity: 1;
+    visibility: visible;
+
+    .modal {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, -50%);
     }
   }
 }
