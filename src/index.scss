@@ -1,6 +1,6 @@
 * {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
-    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
 body {
@@ -33,7 +33,7 @@ body {
 
   &:hover {
     box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
-    transform: translateY(-1px);
+    transform: translateY(-5px);
   }
 
   &:active {
@@ -44,11 +44,13 @@ body {
 
 .overlay {
   position: absolute;
-  left: 0;
+  left: 0px;
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
+  //background-color: rgba(0, 0, 0, 0.4);
+  background: rgb(0, 127, 242);
+  background: linear-gradient(180deg, rgba(0, 127, 242, 1) 50%, rgba(255, 243, 10, 0.9867297260701156) 50%);
   transition: all 0.5s ease-in-out;
 }
 
@@ -69,6 +71,7 @@ body {
   img {
     border-radius: 5px;
     width: 100%;
+    height: 320px;
   }
 
   svg {
