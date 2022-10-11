@@ -4,7 +4,7 @@ import './index.scss';
 function App() {
   return (
     <div className="App">
-      <button className="open-modal-btn">✨ Открыть окно</button>
+      <button className="open-modal-btn">✨ Open Window</button>
       {/* <div className="overlay">
         <div className="modal">
           <svg height="200" viewBox="0 0 200 200" width="200">
