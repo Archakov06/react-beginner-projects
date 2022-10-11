@@ -3,8 +3,6 @@ import {Skeleton} from './Skeleton';
 import {User} from "./User";
 
 export const Users = ({items, isLoading}) => {
-    // 6. isLoading - позволяет нам отрендарить скелетон, другими словами - это
-    // ложная загрузка (3 блоков) означает, что сейчас что-то появится
     return (
         <>
             <div className="search">
@@ -14,10 +12,6 @@ export const Users = ({items, isLoading}) => {
                 </svg>
                 <input type="text" placeholder="Найти пользователя..."/>
             </div>
-
-            {/* 7. Работает лживая загрузка вот здесь, если оно true, а если
-            оно false, то рендерится лишь один блок, то есть начальная страница
-            пользователей */}
             {isLoading ? (
                 <div className="skeleton-list">
                     <Skeleton/>
@@ -26,17 +20,7 @@ export const Users = ({items, isLoading}) => {
                 </div>
             ) : (
                 <ul className="users-list">
-                    {/* 8. Тут мы берем (получаем) данные items, из него вытаскиваем каждого пользователя и передаем внутрь*/}
                     {items.map((obj) => (
-                        /* 13. Если у нас в объекте хранятся такие же
-                        объекты, что и пропсы
-                           first_name = {obj.first_name}
-                             last_name = {obj.last_name}
-                              email = {obj.email}
-                               avatar = {obj.avatar}
-                            можно сократить и передать
-                         */
-                        // Также необходимо передать ключ, так как мы рендерим его с помощью map
                         <User key={obj.id} {...obj} />
                     ))}
                 </ul>
