@@ -8,6 +8,11 @@ import { Users } from './components/Users';
 function App() {
     const [users, setUsers] = React.useState([])
     const [isLoading, setLoading] = React.useState(true)
+
+    //1. Собираемся сделать контролируемый инпут в месте где index.jsx в 13 строке
+    // укажем отдельный onChange, который будет контролироватся от state
+    const [searchValue, setSearchValue] = React.useState('')
+
     React.useEffect(() => {
         fetch('https://reqres.in/api/users')
             .then(res => res.json())
@@ -21,10 +26,21 @@ function App() {
             .finally(() => setLoading(false))
     },[]);
 
+    const onChangeSearchValue = (event) => {
+        setSearchValue(event.target.value);
+    };
 
     return (
         <div className="App">
-            <Users items={users} isLoading={isLoading}/>
+            {
+                //2. Передаем стрелочные функции
+            }
+            <Users
+                items = {users}
+                isLoading = {isLoading}
+                searchValue = {searchValue}
+                onChangeSearchValue = {onChangeSearchValue}
+            />
             {/* <Success /> */}
         </div>
     );
