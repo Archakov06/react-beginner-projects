@@ -2,7 +2,11 @@ import React from 'react';
 import {Skeleton} from './Skeleton';
 import {User} from "./User";
 
-export const Users = ({items, isLoading, searchValue, onChangeSearchValue}) => {
+export const Users = ({
+        items, isLoading,
+        searchValue, onChangeSearchValue,
+        invites, onClickInvite
+    }) => {
     return (
         <>
             <div className="search">
@@ -36,7 +40,15 @@ export const Users = ({items, isLoading, searchValue, onChangeSearchValue}) => {
                         )
 
                     }).map((obj) => (
-                        <User key={obj.id} {...obj} />
+                        // 7. Внутри массива invites нужно проверить есть ли то что есть в этом объекте - id
+                        // Другими словами при каждом рендиренге будем проверять есть ли в invites массиве данный
+                        // пользователь. Если он есть то меняй плюс на минус
+                        <User
+                            onClickInvite = {onClickInvite}
+                            isInvited = {invites.includes(obj.id)}
+                            key = {obj.id}
+                            {...obj}
+                        />
                     ))}
                 </ul>
             )}
