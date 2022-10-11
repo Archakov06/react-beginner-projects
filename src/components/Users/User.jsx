@@ -22,10 +22,8 @@ export const User = ( {id, email, first_name, last_name, avatar, onClickInvite, 
         </div>
 
         <img
-          // 2. Наш компонент будет получать метод onClickInvite, и при клике он буде вызываться
             onClick={() => onClickInvite(id)}
             className="action"
-            // 3. Необходимо определить есть ли этот пользователь или его нет, если он приглашен, то -, если нет, то +. У нас заранее есть фото для двух вариантов
             src={`/assets/${isInvited ? "minus" : "plus"}.svg`}
             alt="Action"
         />
