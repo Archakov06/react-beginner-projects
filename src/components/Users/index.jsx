@@ -26,10 +26,8 @@ export const Users = ({items, isLoading, searchValue, onChangeSearchValue}) => {
             ) : (
                 <ul className="users-list">
                     {items.filter(obj => {
-                        // Объединяет имя и фамилия
                         const fullName = (obj.first_name + obj.last_name).toLowerCase();
 
-                        // Если есть совпадение в имени или в эмайле, то верни true
                         return (fullName
                                     .includes(searchValue.toLowerCase()) ||
                                 obj.email

@@ -8,9 +8,6 @@ import { Users } from './components/Users';
 function App() {
     const [users, setUsers] = React.useState([])
     const [isLoading, setLoading] = React.useState(true)
-
-    //1. Собираемся сделать контролируемый инпут в месте где index.jsx в 13 строке
-    // укажем отдельный onChange, который будет контролироватся от state
     const [searchValue, setSearchValue] = React.useState('')
 
     React.useEffect(() => {
@@ -32,9 +29,6 @@ function App() {
 
     return (
         <div className="App">
-            {
-                //2. Передаем стрелочные функции
-            }
             <Users
                 items = {users}
                 isLoading = {isLoading}
