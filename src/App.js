@@ -10,8 +10,6 @@ function App() {
     const [isLoading, setLoading] = React.useState(true)
     const [searchValue, setSearchValue] = React.useState('')
     const [invites, setInvites] = React.useState([])
-
-    // 1. Изменения стейта для пользователей, которые будут приглашены в дальнейшем
     const [success, setSuccess] = React.useState(false)
 
     React.useEffect(() => {
@@ -37,19 +35,12 @@ function App() {
             setInvites(prev => [...prev, id])
         }
     }
-
-    // 3. Пишем функцию и передаем его в Users , а затем и в index.js в пропсах пишем его
     const onClickSendInvites = () => {
         setSuccess(true)
     }
 
     return (
         <div className="App">
-
-            {/*
-                2. Если у нас выводит success то выводим Сакссес в противном случае пользователей,
-                а count={invites.length} - необходим для подсчета пользователей которых мы пригласили
-            */}
             { success ? (
                 <Success count={invites.length}/>
             ) : (
@@ -63,7 +54,6 @@ function App() {
                     onClickSendInvites = {onClickSendInvites}
                 />
             )}
-            {/* <Success /> */}
         </div>
     );
 }
