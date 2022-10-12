@@ -1,71 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap');
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
-    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #edf6f9;
+  background-color: #dfe2ff;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+  outline: none;
 }
 
 .App {
+  width: 400px;
+  height: 600px;
+  margin: 50px auto;
+  background-color: #fff;
+  border-radius: 30px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  padding: 40px;
+}
+
+.search {
+  position: relative;
+
+  input {
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 15px;
+    border-radius: 15px;
+    width: 100%;
+    font-size: 16px;
+    padding-left: 50px;
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    top: 17px;
+    left: 20px;
+    opacity: 0.3;
+  }
+}
+
+.users-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow: auto;
+  height: calc(100% - 130px);
+  margin-top: 30px;
+
+  li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+
+    & > div {
+      display: flex;
+    }
+
+    img.avatar {
+      border-radius: 30px;
+      width: 50px;
+      height: 50px;
+      margin-right: 15px;
+    }
+
+    .action {
+      width: 28px;
+      height: 28px;
+      opacity: 0.3;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+
+    h3 {
+      margin: 0;
+      font-weight: 900;
+      font-family: 'Merriweather', serif;
+      margin-left: 15px;
+      margin-top: 5px;
+      margin-left: 0;
+      color: #182170;
+    }
+
+    p {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      margin: 0;
+      color: rgba(0, 0, 0, 0.5);
+      margin-top: 3px;
+
+      svg {
+        width: 16px;
+        height: 16px;
+        margin-right: 4px;
+
+        path {
+          fill: rgba(0, 0, 0, 0.2);
+        }
+      }
+    }
+  }
+}
+
+.send-invite-btn {
+  background-color: rgb(251, 80, 0);
+  padding: 16px 15px;
+  border-radius: 15px;
+  font-size: 16px;
+  color: #fff;
+  width: 100%;
+  border: 0;
+  outline: none;
+  box-shadow: 0 7px 10px rgba(251, 80, 0, 0.4);
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+
+  &:hover {
+    background-color: rgb(255, 97, 24);
+  }
+
+  &:active {
+    transform: translateY(2px);
+    box-shadow: none;
+  }
+}
+
+.success-block {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  text-align: center;
+  height: 100%;
+  flex-direction: column;
+  animation: success-show 0.5s cubic-bezier(0.25, 0.75, 0.5, 1.25);
 
-  h1 {
-    color: #000;
-    font-size: 7rem;
-    margin: 0;
-    margin-bottom: 20px;
-
-    &.plus {
-      color: #2a9d8f;
-    }
-    &.minus {
-      color: #e63946;
-    }
+  img {
+    width: 120px;
+    height: 120px;
   }
 
-  h2 {
-    font-size: 2rem;
-    margin: 0;
-    color: #556581;
+  h3 {
+    font-size: 24px;
+    margin-bottom: 0;
+    margin-top: 10px;
+  }
+
+  p {
+    text-align: center;
+    margin-bottom: 30px;
   }
 
   button {
-    background: transparent;
-    border: 2px solid transparent;
-    text-align: center;
-    font-size: 22px;
-    border-radius: 15px;
-    padding: 10px 25px;
-    cursor: pointer;
-    margin: 0 10px;
-    transition: all 0.05s ease-in-out;
+    width: 200px;
+  }
+}
 
-    &.minus {
-      background-color: #e63946;
-      color: #fff;
-      box-shadow: 0 4px 0 darken(#e63946, 10%);
-      border: 1px solid darken(#e63946, 15%);
-    }
+.skeleton-list {
+  height: calc(100% - 130px);
+  margin-top: 30px;
 
-    &.plus {
-      background-color: #2a9d8f;
-      color: #fff;
-      box-shadow: 0 4px 0 darken(#2a9d8f, 10%);
-      border: 1px solid darken(#2a9d8f, 15%);
-    }
+  svg {
+    margin-bottom: 15px;
+  }
+}
 
-    &:hover {
-      transform: translateY(-2px);
-    }
+@keyframes success-show {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
 
-    &:active {
-      transform: translateY(2px);
-      box-shadow: none;
-    }
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
 }
