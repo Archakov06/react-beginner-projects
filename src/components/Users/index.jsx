@@ -5,7 +5,8 @@ import {User} from "./User";
 export const Users = ({
         items, isLoading,
         searchValue, onChangeSearchValue,
-        invites, onClickInvite
+        invites, onClickInvite,
+        onClickSendInvites
     }) => {
     return (
         <>
@@ -49,7 +50,19 @@ export const Users = ({
                     ))}
                 </ul>
             )}
-            <button className="send-invite-btn">Отправить приглашение</button>
+
+            {/*
+               4.  Кнопка появится только после того как мы кого-то пригласили,
+                хотя бы 1 человека.
+            */}
+            {
+                invites.length > 0 && (
+                    <button
+                        onClick={onClickSendInvites}
+                        className="send-invite-btn">Отправить приглашение
+                    </button>
+                )
+            }
         </>
     );
 };
