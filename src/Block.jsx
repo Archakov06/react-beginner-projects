@@ -1,13 +1,8 @@
 import React from 'react';
 
-// Статичный массив, где указаны 4 валюты и затем маппит он, то есть выводит все по очереди
 const defaultCurrencies = ['RUB', 'USD', 'EUR', 'GBP'];
 
 export const Block = ({value, currency, onChangeValue, onChangeCurrency}) => (
-    // Получает value (значение), которое будет вбита input; currency - саму валюту
-    // рубль, евро; onChangeValue - функция которая будет возвращать нам то, что мы ввели
-    // в этом инпуте; и onChangeCurrency - функция, которая будет оповещать нам какая функция
-    // выбрана
     <div className="block">
         <ul className="currencies">
             {defaultCurrencies.map((cur) => (

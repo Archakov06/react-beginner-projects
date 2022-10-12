@@ -4,9 +4,6 @@ import './index.scss';
 
 function App() {
     // const [rates, setRates] = React.useState({})
-
-    /* Хук useRef позволяет сохранить некоторый объект, который можно можно изменять и который хранится в течение всей жизни компонента. В качестве параметра функция useRef() принимает начальное значение хранимого объекта. А возвращаемое значение - ссылка-объект, из свойства current которого можно получить хранимое значение.
-     */
     const ratesRef = React.useRef({})
 
     const [fromCurrency, setFromCurrency] = React.useState("RUB")
@@ -39,23 +36,16 @@ function App() {
         setToPrice(value)
     }
 
-    // Функция для изменения валюту
     const onChangeFromCurrency = (cur) => {
-        // Сохраняем саму валюту
         setFromCurrency(cur)
-        // И паралельно сумму от той валюты, которую мы изменили
-        // мы будем вносить во вторую колонку
         onChangeFromPrice(fromPrice)
     }
 
     React.useEffect(() => {
         onChangeFromPrice(fromPrice)
-        // 1. Дождись когда наш каренси изменится и только после этого ты должен взять часть
     }, [fromCurrency])
-
     React.useEffect(() => {
         onChangeToPrice(toPrice)
-        // 1. Дождись когда наш каренси изменится и только после этого ты должен взять часть
     }, [toCurrency])
 
   return (
