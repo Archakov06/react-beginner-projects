@@ -67,7 +67,7 @@ function App() {
                 }
             </div>
             <ul className="pagination">
-                {[...Array(5)].map((_, index) => (
+                {[...Array(3)].map((_, index) => (
                         <li onClick = {() => setPage(index + 1)}
                             className={page === index + 1 ? "active" : ''}>
                             { index + 1 }
