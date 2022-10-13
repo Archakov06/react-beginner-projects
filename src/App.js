@@ -2,7 +2,17 @@ import React from 'react';
 import './index.scss';
 import {Collection} from "./Collection";
 
+const carts = [
+    { "name": "Все" },
+    { "name": "Море" },
+    { "name": "Горы" },
+    { "name": "Архитектура" },
+    { "name": "Города" }
+]
+
 function App() {
+    // Определяеем какую категорию мы выбрали и передавать её в мок.апи
+    const [categoryId, setCategoryId] = React.useState(0)
     const [searchValue, setSearchValue] = React.useState("")
     const [collections, setCollections] = React.useState([])
 
@@ -24,11 +34,14 @@ function App() {
             <h1>Моя коллекция фотографий</h1>
             <div className="top">
                 <ul className="tags">
-                    <li className="active">Все</li>
-                    <li>Горы</li>
-                    <li>Море</li>
-                    <li>Архитектура</li>
-                    <li>Города</li>
+                    {  carts.map((obj, index) => (
+                        // Если категория айди совпадает с индексом то сделай флажок темным
+                        <li
+                            onClick={() => setCategoryId(index)}
+                            className={categoryId === index ? "active" : ""}
+                            key = {obj.name}>{obj.name}</li>
+                    ))}
+
                 </ul>
                 <input
                     value={searchValue}
