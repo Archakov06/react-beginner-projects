@@ -3,7 +3,8 @@ import './index.scss';
 import {Collection} from "./Collection";
 
 function App() {
-    const [collections, setCollections] = React.useState()
+    const [searchValue, setSearchValue] = React.useState("")
+    const [collections, setCollections] = React.useState([])
 
     React.useEffect(() => {
         fetch('https://634812fbdb76843976b9b35d.mockapi.io/Collections')
@@ -29,12 +30,20 @@ function App() {
                     <li>Архитектура</li>
                     <li>Города</li>
                 </ul>
-                <input className="search-input" placeholder="Поиск по названию"/>
+                <input
+                    value={searchValue}
+                    onChange = {(e) => setSearchValue(e.target.value)}
+                    className="search-input"
+                    placeholder="Поиск по названию"/>
             </div>
             <div className="content">
-                {collections.map((obj, index) => (
-                    <Collection key = {index} name={obj.name} images={obj.photos}/>
-                ))}
+                {collections
+                    .filter(obj => {
+                        return obj.name.toLowerCase().includes(searchValue.toLowerCase())
+                    })
+                    .map((obj, index) => (
+                        <Collection key = {index} name={obj.name} images={obj.photos}/>
+                    ))}
             </div>
             <ul className="pagination">
                 <li>1</li>
