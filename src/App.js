@@ -11,18 +11,18 @@ const carts = [
 ]
 
 function App() {
-    // Определяеем какую категорию мы выбрали и передавать её в мок.апи
     const [categoryId, setCategoryId] = React.useState(0)
     const [searchValue, setSearchValue] = React.useState("")
     const [collections, setCollections] = React.useState([])
     const [isLoading, setIsLoading] = React.useState(0)
+    // добавление пагинации
+    const [page,setPage] = React.useState(1)
 
     React.useEffect(() => {
         setIsLoading(true)
-        fetch(`https://634812fbdb76843976b9b35d.mockapi.io/Collections?${
-            categoryId ? `category=${categoryId}` : ''
-        }`,
-            )
+        const category = categoryId ? `category=${categoryId}` : ''
+
+        fetch(`https://634812fbdb76843976b9b35d.mockapi.io/Collections?page=${page}&limit=3&${category}`,)
             .then((res) => res.json())
             .then((json) => {
                 setCollections(json)
@@ -32,7 +32,7 @@ function App() {
                 alert("Ошибка при получение данных")
             })
             .finally(() => setIsLoading(false))
-    }, [categoryId])
+    }, [categoryId, page])
 
 
     return (
@@ -41,7 +41,6 @@ function App() {
             <div className="top">
                 <ul className="tags">
                     {  carts.map((obj, index) => (
-                        // Если категория айди совпадает с индексом то сделай флажок темным
                         <li
                             onClick={() => setCategoryId(index)}
                             className={categoryId === index ? "active" : ""}
@@ -68,9 +67,12 @@ function App() {
                 }
             </div>
             <ul className="pagination">
-                <li>1</li>
-                <li className="active">2</li>
-                <li>3</li>
+                {[...Array(5)].map((_, index) => (
+                        <li onClick = {() => setPage(index + 1)}
+                            className={page === index + 1 ? "active" : ''}>
+                            { index + 1 }
+                        </li>
+                    ))}
             </ul>
         </div>
     );
