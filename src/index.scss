@@ -1,71 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap');
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
-    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+    Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #edf6f9;
+  background-color: #eff0f1;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 .App {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  text-align: center;
+  padding: 50px;
+  width: 100%;
+  max-width: 1200px;
+}
 
-  h1 {
-    color: #000;
-    font-size: 7rem;
-    margin: 0;
-    margin-bottom: 20px;
+h1 {
+  font-family: 'Merriweather', serif;
+}
 
-    &.plus {
-      color: #2a9d8f;
-    }
-    &.minus {
-      color: #e63946;
-    }
-  }
+.tags {
+  list-style: none;
+  padding: 0;
 
-  h2 {
-    font-size: 2rem;
-    margin: 0;
-    color: #556581;
-  }
-
-  button {
-    background: transparent;
-    border: 2px solid transparent;
-    text-align: center;
-    font-size: 22px;
-    border-radius: 15px;
-    padding: 10px 25px;
+  li {
+    display: inline-block;
+    padding: 12px 18px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin-right: 10px;
     cursor: pointer;
-    margin: 0 10px;
-    transition: all 0.05s ease-in-out;
-
-    &.minus {
-      background-color: #e63946;
-      color: #fff;
-      box-shadow: 0 4px 0 darken(#e63946, 10%);
-      border: 1px solid darken(#e63946, 15%);
-    }
-
-    &.plus {
-      background-color: #2a9d8f;
-      color: #fff;
-      box-shadow: 0 4px 0 darken(#2a9d8f, 10%);
-      border: 1px solid darken(#2a9d8f, 15%);
-    }
+    font-weight: 500;
+    font-size: 18px;
+    border: 1px solid transparent;
+    transition: all 0.15s ease-in-out;
 
     &:hover {
-      transform: translateY(-2px);
+      border-color: #000;
     }
 
-    &:active {
-      transform: translateY(2px);
-      box-shadow: none;
+    &.active {
+      background-color: #000;
+      color: #fff;
+    }
+  }
+}
+
+.content {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 30px;
+  grid-row-gap: 30px;
+  margin-top: 40px;
+
+  @media (max-width: 1000px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.collection {
+  max-width: 470px;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 30px;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+
+  h4 {
+    margin: 0;
+    margin-top: 15px;
+    font-size: 20px;
+    font-family: 'Merriweather', serif;
+  }
+
+  &:hover {
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+  }
+
+  @media (max-width: 1000px) {
+    width: 100%;
+  }
+
+  img {
+    object-fit: cover;
+  }
+
+  &__big {
+    height: 250px;
+    width: 100%;
+    border-radius: 20px;
+    margin-bottom: 15px;
+  }
+
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__mini {
+    width: 31%;
+    height: 80px;
+    border-radius: 20px;
+  }
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.search-input {
+  font-size: 16px;
+  width: 250px;
+  height: 50px;
+  padding: 0 15px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  outline: none;
+  transition: all 0.15s ease-in-out;
+
+  &:focus {
+    border: 1px solid rgba(0, 0, 0, 0.4);
+  }
+}
+
+.pagination {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-top: 40px;
+
+  li {
+    display: inline-block;
+    padding: 10px 17px;
+    background-color: white;
+    font-size: 18px;
+    border-radius: 10px;
+    margin-right: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+
+    &.active {
+      background-color: black;
+      color: #fff;
     }
   }
 }
