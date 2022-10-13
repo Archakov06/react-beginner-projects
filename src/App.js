@@ -15,9 +15,14 @@ function App() {
     const [categoryId, setCategoryId] = React.useState(0)
     const [searchValue, setSearchValue] = React.useState("")
     const [collections, setCollections] = React.useState([])
+    const [isLoading, setIsLoading] = React.useState(0)
 
     React.useEffect(() => {
-        fetch('https://634812fbdb76843976b9b35d.mockapi.io/Collections')
+        setIsLoading(true)
+        fetch(`https://634812fbdb76843976b9b35d.mockapi.io/Collections?${
+            categoryId ? `category=${categoryId}` : ''
+        }`,
+            )
             .then((res) => res.json())
             .then((json) => {
                 setCollections(json)
@@ -26,7 +31,8 @@ function App() {
                 console.warn(err);
                 alert("Ошибка при получение данных")
             })
-    }, [])
+            .finally(() => setIsLoading(false))
+    }, [categoryId])
 
 
     return (
@@ -50,13 +56,16 @@ function App() {
                     placeholder="Поиск по названию"/>
             </div>
             <div className="content">
-                {collections
-                    .filter(obj => {
-                        return obj.name.toLowerCase().includes(searchValue.toLowerCase())
-                    })
-                    .map((obj, index) => (
-                        <Collection key = {index} name={obj.name} images={obj.photos}/>
-                    ))}
+                { isLoading
+                    ? <h2>Загрузка ...</h2>
+                    : (collections
+                        .filter(obj => {
+                            return obj.name.toLowerCase().includes(searchValue.toLowerCase())
+                        })
+                        .map((obj, index) => (
+                            <Collection key={index} name={obj.name} images={obj.photos}/>
+                        )))
+                }
             </div>
             <ul className="pagination">
                 <li>1</li>
