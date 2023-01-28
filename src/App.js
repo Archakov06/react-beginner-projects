@@ -1,11 +1,11 @@
-import './index.scss';
+import "./index.scss";
 
 function App() {
   return (
     <div className="App">
       <div>
         <h2>Счетчик:</h2>
-        <h1>0</h1>
+        <h1>000000000</h1>
         <button className="minus">- Минус</button>
         <button className="plus">Плюс +</button>
       </div>
