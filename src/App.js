@@ -1,3 +1,5 @@
+import React from 'react';
+import { useState } from 'react';
 import './index.scss';
 
 const questions = [
@@ -22,37 +24,56 @@ const questions = [
   },
 ];
 
-function Result() {
+function Result({correct}) {
   return (
     <div className="result">
       <img src="https://cdn-icons-png.flaticon.com/512/2278/2278992.png" />
-      <h2>Вы отгадали 3 ответа из 10</h2>
+      <h2>Вы отгадали {correct} ответа из {questions.length}</h2>
+      <a href='/'>
       <button>Попробовать снова</button>
+      </a>
     </div>
   );
 }
 
-function Game() {
+function Game({step, question, onClickVariant}) {
+  const percent = Math.round(step / questions.length * 100) 
   return (
     <>
       <div className="progress">
-        <div style={{ width: '50%' }} className="progress__inner"></div>
+        <div style={{ width: `${percent}%` }} className="progress__inner"></div>
       </div>
-      <h1>Что такое useState?</h1>
+      <h1>{question.title}</h1>
       <ul>
-        <li>Это функция для хранения данных компонента</li>
-        <li>Это глобальный стейт</li>
-        <li>Это когда на ты никому не нужен</li>
+        {
+          question.variants.map((item, index) => (
+            <li onClick={() => onClickVariant(index)} key={item}>{item}</li>
+          ))
+        }
       </ul>
     </>
   );
 }
 
 function App() {
+  const [step, setStep] = useState(0)
+  const [correct, setCorrect] = useState(0)
+
+  const question = questions[step]
+
+  const onClickVariant = (index) => {
+    console.log(step, index)
+    setStep(step + 1)
+    if (index === question.correct) {
+      setCorrect(correct + 1)
+    }
+  }
+
   return (
     <div className="App">
-      <Game />
-      {/* <Result /> */}
+      {
+        step !== questions.length ? <Game step={step} question={question} onClickVariant={onClickVariant}/> : <Result correct={correct} />
+      }
     </div>
   );
 }
