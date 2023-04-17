@@ -1,14 +1,12 @@
+import React from 'react';
+import { Block } from './Block';
 import './index.scss';
 
 function App() {
   return (
     <div className="App">
-      <div>
-        <h2>Счетчик:</h2>
-        <h1>0</h1>
-        <button className="minus">- Минус</button>
-        <button className="plus">Плюс +</button>
-      </div>
+      <Block value={0} currency="RUB" onChangeCurrency={(cur) => console.log(cur)} />
+      <Block value={0} currency="USD" />
     </div>
   );
 }
