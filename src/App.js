@@ -2,6 +2,8 @@ import React from 'react';
 import './index.scss';
 
 function App() {
+
+  
   return (
     <div className="App">
       <button className="open-modal-btn">✨ Open window</button>

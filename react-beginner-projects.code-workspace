@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"name": "react-beginner-projects",
+			"path": "."
+		}
+	],
+	"settings": {
+		"git.ignoreLimitWarning": true
+	}
+}
